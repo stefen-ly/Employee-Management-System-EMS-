@@ -82,7 +82,6 @@ public class MainRouter {
         }
     }
 
-
     public final static String SYSTEM_INFO = """
             ╔══════════════════════════════════════════════════════════════════════════════╗
             ║                                 SYSTEM INFO                                  ║
