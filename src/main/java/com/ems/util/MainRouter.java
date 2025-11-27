@@ -92,6 +92,7 @@ public class MainRouter {
             ║  -> Features: Employee, Department, Payroll, Attendance, Leave Management    ║
             ║  -> Data Persistence: CSV files in /data directory                           ║            
             ╚══════════════════════════════════════════════════════════════════════════════╝
+            
             """;
 
     private int getIntInput(String prompt) {
