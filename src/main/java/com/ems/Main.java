@@ -14,7 +14,6 @@ public class Main {
         }));
 
         
-        // Start
         MainRouter router = new MainRouter();
         router.start();
     }
