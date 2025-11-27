@@ -1,0 +1,5 @@
+username,password,role,employeeId
+admin,admin123,ADMIN,
+john.doe,john123,STAFF,emp001
+jane.smith,jane123,STAFF,emp002
+mike.johnson,mike123,STAFF,emp003

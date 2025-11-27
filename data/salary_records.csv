@@ -1,0 +1,4 @@
+salaryId,employeeId,basicSalary,bonus,deduction,netSalary,taxAmount,month,year,paymentDate
+SAL001,emp001,75000.00,5000.00,0.00,64000.00,16000.00,NOVEMBER,2025,2025-11-25
+sal002,emp005,1000.00,0.00,0.00,950.00,50.00,null,0,2025-11-26
+sal003,emp005,1000.00,0.00,0.00,950.00,50.00,null,0,2025-11-26

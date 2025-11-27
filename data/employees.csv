@@ -1,0 +1,8 @@
+employeeId,name,dateOfBirth,gender,email,phone,address,position,departmentId,salary
+emp002,Dara,2004-12-30,M,dara@gmail.com,0883789261,PP,IT,dep3,4000.00
+emp003,Khan Mali,2003-12-02,M,mali@gmail.com,12345678,PT,DevOps,dep1,3000.00
+emp005,Ally Van,2003-11-22,M,ally@gmail.com,123456781,PP,IT,dep1,1000.00
+emp004,Jimmy,2005-03-10,M,jimmy@gmail.com,1234567890,PV,HR,dep3,10000.00
+emp005,Vanly,2004-11-30,,vanly@gmail.com,12345678,PP,,dep1,10000.00
+emp006,Nara No,2003-10-02,,nara@gmail.com,1234567891,,PV,dep1,10000.00
+emp007,Koko ka,2001-02-20,M,koko@gmail.com,1234567890,PP1,Hr,dep2,20000.00

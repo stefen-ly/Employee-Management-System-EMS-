@@ -1,0 +1,3 @@
+leaveId,employeeId,leaveType,startDate,endDate,reason,status,requestDate
+lv002,emp003,SICK,2025-11-25,2025-11-25,sdfcsdf,PENDING,2025-11-25
+lv001,emp003,SICK,2025-11-25,2025-11-26,Headace,APPROVED,2025-11-25
