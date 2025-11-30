@@ -127,7 +127,7 @@ public class AdminMenu {
                 case 3:
                     manualSaveData();
                     break;
-                case 4:
+                case 0:
                     running = false;
                     break;
                 default:

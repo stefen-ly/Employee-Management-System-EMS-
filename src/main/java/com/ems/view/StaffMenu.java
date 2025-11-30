@@ -355,7 +355,7 @@ public class StaffMenu {
             ║ [2]. Annual Leave                                ║
             ║ [3]. Emergency Leave                             ║ 
             ║ [4]. Personal Leave                              ║
-            ║ [5]. Maternity/Paternity Leave                   ║                                     
+            ║ [0]. Maternity/Paternity Leave                   ║                                     
             ╚══════════════════════════════════════════════════╝  
             """;
 
@@ -369,7 +369,7 @@ public class StaffMenu {
             case 2: leaveType = "ANNUAL"; break;
             case 3: leaveType = "EMERGENCY"; break;
             case 4: leaveType = "PERSONAL"; break;
-            case 5: leaveType = "MATERNITY/PATERNITY"; break;
+            case 0: leaveType = "MATERNITY/PATERNITY"; break;
             default:
                 System.out.println("Invalid leave type selected.");
                 return;

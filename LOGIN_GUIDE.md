@@ -16,30 +16,20 @@ When you run the application, you'll see demo credentials automatically displaye
 ### Staff Accounts (Limited Access)
 
 #### 1. John Doe - Software Developer (IT Department)
-- **Username:** `john.doe`
-- **Password:** `john123`
+- **Username:** `jimmy`
+- **Password:** `jimmy123`
 - **Employee ID:** emp001
 - **Department:** IT Department
 - **Position:** Software Developer
 - **Salary:** $75,000
 
 #### 2. Jane Smith - HR Manager (HR Department)
-- **Username:** `jane.smith`
-- **Password:** `jane123`
+- **Username:** `messoy`
+- **Password:** `messoy123`
 - **Employee ID:** emp002
 - **Department:** HR Department
 - **Position:** HR Manager
 - **Salary:** $65,000
-
-#### 3. Mike Johnson - Accountant (Finance Department)
-- **Username:** `mike.johnson`
-- **Password:** `mike123`
-- **Employee ID:** emp003
-- **Department:** Finance Department
-- **Position:** Accountant
-- **Salary:** $60,000
-
----
 
 ## Access Levels
 

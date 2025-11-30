@@ -65,36 +65,6 @@ public class DepartmentMenu {
             ╚══════════════════════════════════════════════════╝
             """;
 
-//    private void addDepartment() {
-//        System.out.println("╔══════════════════════════════════════════════════╗");
-//        System.out.println("║                Add New Department                ║");
-//        System.out.println("╚══════════════════════════════════════════════════╝");
-//        System.out.print("Department Name: ");
-//        String name = scanner.nextLine();
-//
-//        System.out.print("Description: ");
-//        String description = scanner.nextLine();
-//
-//        System.out.print("Manager ID (optional, press Enter to skip): ");
-//        String managerId = scanner.nextLine();
-//        if (managerId.trim().isEmpty()) {
-//            managerId = null;
-//        }
-//
-//        Department department = new Department(null, name, description, managerId);
-//
-//        if (departmentService.addDepartment(department)) {
-//            System.out.println("✓ Department added successfully! ID: " + department.getDepartmentId());
-//
-//            System.out.print("Add another department? (y/n): ");
-//            if (scanner.nextLine().equalsIgnoreCase("y")) {
-//                addDepartment();
-//            }
-//        } else {
-//            System.out.println("✗ Failed to add department.");
-//        }
-//    }
-
     private void addDepartment() {
         System.out.println("╔══════════════════════════════════════════════════╗");
         System.out.println("║                Add New Department                ║");
@@ -139,31 +109,91 @@ public class DepartmentMenu {
         }
     }
 
+//    public void viewDepartments() {
+//        List<Department> departments = departmentService.getAllDepartments();
+//
+//        if (departments.isEmpty()) {
+//            System.out.println("No departments found.");
+//        } else {
+//            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+//            System.out.println("║                          ALL DEPARTMENTS                        ║");
+//            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+//            Table table = new Table(4, BorderStyle.UNICODE_ROUND_BOX_WIDE);
+//            table.addCell("ID");
+//            table.addCell("Name");
+//            table.addCell("Description");
+//            table.addCell("Manager ID");
+//
+//            for (Department dept : departments) {
+//                table.addCell(dept.getDepartmentId());
+//                table.addCell(dept.getDepartmentName());
+//                table.addCell(dept.getDescription());
+//                table.addCell(dept.getManagerId() != null ? dept.getManagerId() : "N/A");
+//            }
+//
+//            System.out.println(table.render());
+//        }
+//    }
+
     public void viewDepartments() {
         List<Department> departments = departmentService.getAllDepartments();
-        
+
         if (departments.isEmpty()) {
             System.out.println("No departments found.");
-        } else {
-            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-            System.out.println("║                          ALL DEPARTMENTS                        ║");
-            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+            Components.pause();
+            return;
+        }
+
+        final int ROWS_PER_PAGE = 5;
+        int totalDepartments = departments.size();
+        int totalPages = (totalDepartments + ROWS_PER_PAGE - 1) / ROWS_PER_PAGE;
+        int currentPage = 1;
+
+        while (true) {
+            Components.clearScreen();
+
+            int start = (currentPage - 1) * ROWS_PER_PAGE;
+            int end = Math.min(start + ROWS_PER_PAGE, totalDepartments);
+            List<Department> pageDepartments = departments.subList(start, end);
+
+            // Header
+            System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                         LIST DEPARTMENTS - Page " + currentPage + " of " + totalPages + "                           ║");
+            System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════╝");
+
+            // Table
             Table table = new Table(4, BorderStyle.UNICODE_ROUND_BOX_WIDE);
             table.addCell("ID");
             table.addCell("Name");
             table.addCell("Description");
             table.addCell("Manager ID");
-            
-            for (Department dept : departments) {
+
+            for (Department dept : pageDepartments) {
                 table.addCell(dept.getDepartmentId());
                 table.addCell(dept.getDepartmentName());
                 table.addCell(dept.getDescription());
                 table.addCell(dept.getManagerId() != null ? dept.getManagerId() : "N/A");
             }
-            
+
             System.out.println(table.render());
+
+            // Navigation
+            System.out.print("Press [N] Next | [P] Previous | [B] Back to Menu: ");
+            String choice = scanner.nextLine().trim().toLowerCase();
+
+            if (choice.equals("n") && currentPage < totalPages) {
+                currentPage++;
+            } else if (choice.equals("p") && currentPage > 1) {
+                currentPage--;
+            } else if (choice.equals("b")) {
+                return;
+            } else {
+                System.out.println("Invalid input or boundary reached! Press Enter to continue...");
+                scanner.nextLine();
+            }
         }
     }
+
 
     private void displaySingleDepartment(Department dept) {
         if (dept == null) {

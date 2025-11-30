@@ -37,8 +37,7 @@ public class DataStore {
         attendances = csvManager.loadAttendance();
         leaveRequests = csvManager.loadLeaveRequests();
         salaryRecords = csvManager.loadSalaryRecords();
-        
-        // If no data exists, initialize with default data
+
         if (employees.isEmpty() && departments.isEmpty() && users.isEmpty()) {
             System.out.println("No existing data found. Initializing with default data...");
             initializeDefaultData();
@@ -52,12 +51,12 @@ public class DataStore {
         // Create default admin user
         users.add(new User("admin", "admin123", "ADMIN", null));
         
-        // Add sample departments
+        // Add departments
         departments.add(new Department("dep1", "IT Department", "Information Technology", null));
         departments.add(new Department("dep2", "HR Department", "Human Resources", null));
         departments.add(new Department("dep3", "Finance Department", "Finance and Accounting", null));
         
-        // Add sample employees
+        // Add employees
         Employee emp1 = new Employee(
             "emp001",
             "Jimmy Kiss",
@@ -107,7 +106,7 @@ public class DataStore {
         users.add(new User("messoy10", "messoy123", "STAFF", "emp002"));
         users.add(new User("penaldo7", "cr7777", "STAFF", "emp003"));
         
-        // Add sample salary records
+        // Add salary records
         SalaryRecord sal1 = new SalaryRecord("SAL001", "emp001", 75000.00);
         sal1.setBonus(5000.00);
         sal1.setDeduction(0.00);
@@ -115,6 +114,7 @@ public class DataStore {
         sal1.setMonth(LocalDate.now().getMonth().toString());
         sal1.setYear(LocalDate.now().getYear());
         salaryRecords.add(sal1);
+
     }
 
     public void saveAllData() {

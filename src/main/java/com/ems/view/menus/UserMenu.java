@@ -76,7 +76,7 @@ public class UserMenu {
         System.out.print("[+] Enter Password: ");
         String password = scanner.nextLine();
         
-        System.out.print("Role (ADMIN/STAFF): ");
+        System.out.print("[+] Role (ADMIN/STAFF): ");
         String role = scanner.nextLine().toUpperCase();
         
         if (!role.equals("ADMIN") && !role.equals("STAFF")) {
@@ -130,26 +130,62 @@ public class UserMenu {
 
     private void viewAllUsers() {
         List<User> users = userService.getAllUsers();
-        
+
         if (users.isEmpty()) {
             System.out.println("No users found.");
-        } else {
-            System.out.println("╔════════════════════════════════════╗");
-            System.out.println("║              ALL USERS             ║");
-            System.out.println("╚════════════════════════════════════╝");
+            Components.pause();
+            return;
+        }
+
+        final int ROWS_PER_PAGE = 5;
+        int total = users.size();
+        int totalPages = (total + ROWS_PER_PAGE - 1) / ROWS_PER_PAGE;
+        int currentPage = 1;
+
+        while (true) {
+            Components.clearScreen();
+
+            int start = (currentPage - 1) * ROWS_PER_PAGE;
+            int end = Math.min(start + ROWS_PER_PAGE, total);
+            List<User> pageUsers = users.subList(start, end);
+
+            // Header
+            System.out.println("╔════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                              ALL USERS - Page " + currentPage + " of " + totalPages + "                             ║");
+            System.out.println("╚════════════════════════════════════════════════════════════════════════════════════╝");
+
+            // Table
             Table table = new Table(3, BorderStyle.UNICODE_ROUND_BOX_WIDE);
             table.addCell("Username");
             table.addCell("Role");
             table.addCell("Employee ID");
-            
-            for (User user : users) {
+
+            for (User user : pageUsers) {
                 table.addCell(user.getUsername());
                 table.addCell(user.getRole());
                 table.addCell(user.getEmployeeId() != null ? user.getEmployeeId() : "N/A");
             }
-            
+
             System.out.println(table.render());
-            System.out.println("Total: " + users.size() + " users");
+            System.out.println("Total Users: " + total);
+
+            // Navigation
+            System.out.print("Press [N] Next | [P] Previous | [B] Back to Menu: ");
+            String choice = scanner.nextLine().trim().toLowerCase();
+
+            if (choice.equals("n") && currentPage < totalPages) {
+                currentPage++;
+            }
+            else if (choice.equals("p") && currentPage > 1) {
+                currentPage--;
+            }
+            else if (choice.equals("b")) {
+                return;
+            }
+            else {
+                System.out.println("Invalid choice or boundary reached! Press Enter to continue...");
+                scanner.nextLine();
+            }
         }
     }
 

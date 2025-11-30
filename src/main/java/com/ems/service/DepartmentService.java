@@ -20,7 +20,6 @@ public class DepartmentService implements IDepartmentService {
     }
     @Override
     public Department getDepartmentById(String id) {
-        // Implementation: Find department by ID. (Resolves the previous compilation error)
         if (id == null) return null;
         return DataStore.getInstance().getDepartments().stream()
                 .filter(d -> d.getDepartmentId().equalsIgnoreCase(id.trim()))

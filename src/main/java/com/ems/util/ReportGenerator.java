@@ -5,8 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Scanner;
 
 public class ReportGenerator {
+    Scanner scanner = new Scanner(System.in);
 
     public static String generateEmployeeReport(List<Employee> employees) {
         Table table = new Table(4, BorderStyle.UNICODE_ROUND_BOX_WIDE);

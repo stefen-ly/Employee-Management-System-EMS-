@@ -160,7 +160,7 @@ public class CSVManager {
         if (!file.exists()) return users;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE))) {
-            String line = reader.readLine(); // Skip header
+            String line = reader.readLine();
             
             while ((line = reader.readLine()) != null) {
                 String[] parts = parseCSVLine(line);

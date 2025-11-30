@@ -93,13 +93,31 @@ public class AttendanceMenu {
 
     private void showAllAttendance() {
         List<Attendance> attendances = attendanceService.getAllAttendances();
-        
+
         if (attendances.isEmpty()) {
             System.out.println("No attendance records found.");
-        } else {
-            System.out.println("╔═══════════════════════════════════════════════════════════════════════════╗");
-            System.out.println("║                             ALL ATTENDANCE LOGS                           ║");
-            System.out.println("╚═══════════════════════════════════════════════════════════════════════════╝");
+            Components.pause();
+            return;
+        }
+
+        final int ROWS_PER_PAGE = 6;
+        int total = attendances.size();
+        int totalPages = (total + ROWS_PER_PAGE - 1) / ROWS_PER_PAGE;
+        int currentPage = 1;
+
+        while (true) {
+            Components.clearScreen();
+
+            int start = (currentPage - 1) * ROWS_PER_PAGE;
+            int end = Math.min(start + ROWS_PER_PAGE, total);
+            List<Attendance> pageAttendance = attendances.subList(start, end);
+
+            // Header
+            System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                              ALL ATTENDANCE LOGS - Page " + currentPage + " of " + totalPages + "                               ║");
+            System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════╝");
+
+            // Table
             Table table = new Table(6, BorderStyle.UNICODE_ROUND_BOX_WIDE);
             table.addCell("Attendance ID");
             table.addCell("Employee ID");
@@ -107,8 +125,8 @@ public class AttendanceMenu {
             table.addCell("Check-In");
             table.addCell("Check-Out");
             table.addCell("Status");
-            
-            for (Attendance att : attendances) {
+
+            for (Attendance att : pageAttendance) {
                 table.addCell(att.getAttendanceId());
                 table.addCell(att.getEmployeeId());
                 table.addCell(att.getDate().toString());
@@ -116,8 +134,23 @@ public class AttendanceMenu {
                 table.addCell(att.getCheckOut() != null ? att.getCheckOut().toString() : "N/A");
                 table.addCell(att.getStatus());
             }
-            
+
             System.out.println(table.render());
+
+            // Navigation
+            System.out.print("Press [N] Next | [P] Previous | [B] Back to Menu: ");
+            String choice = scanner.nextLine().trim().toLowerCase();
+
+            if (choice.equals("n") && currentPage < totalPages) {
+                currentPage++;
+            } else if (choice.equals("p") && currentPage > 1) {
+                currentPage--;
+            } else if (choice.equals("b")) {
+                return;
+            } else {
+                System.out.println("Invalid input or boundary reached! Press Enter to continue...");
+                scanner.nextLine();
+            }
         }
     }
 

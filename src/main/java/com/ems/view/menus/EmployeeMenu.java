@@ -708,7 +708,7 @@ public class EmployeeMenu {
     private void listLowSalaryEmployees(double threshold) {
         Components.clearScreen();
         System.out.println("╔══════════════════════════════════════════════════╗");
-        System.out.println("║        Employees with Salary Below $" + String.format("%,.2f", threshold) + "      ║");
+        System.out.println("║       Employees with Salary Below $" + String.format("%,.2f", threshold) + "      ║");
         System.out.println("╚══════════════════════════════════════════════════╝");
 
         List<Employee> results = DataStore.getInstance().getEmployees().stream()
