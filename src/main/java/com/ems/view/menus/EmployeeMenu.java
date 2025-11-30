@@ -7,6 +7,7 @@ import com.ems.service.DepartmentService;
 import com.ems.util.*;
 import com.ems.data.DataStore;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
@@ -36,21 +37,27 @@ public class EmployeeMenu {
             switch (choice) {
                 case 1:
                     addEmployee();
+                    Components.pause();
                     break;
                 case 2:
                     viewAllEmployees();
+                    Components.pause();
                     break;
                 case 3:
                     searchEmployee();
+                    Components.pause();
                     break;
                 case 4:
                     updateEmployee();
+                    Components.pause();
                     break;
                 case 5:
                     deleteEmployee();
+                    Components.pause();
                     break;
                 case 6:
                     sortEmployees();
+                    Components.pause();
                     break;
                 case 0:
                     running = false;
@@ -117,8 +124,6 @@ public class EmployeeMenu {
             }
         } while (InputValidator.isEmpty(gender));
 
-
-        // 4. Email Input with Auto-complete (REVERTED LOGIC)
         System.out.print("[+] Enter Email (@gmail.com will be added): ");
         String email = InputValidator.processEmail(scanner.nextLine());
 
@@ -177,10 +182,25 @@ public class EmployeeMenu {
             }
         }
 
-        Employee employee = new Employee(null, name, dob, gender, email, phone, address, position, deptId, salary);
+        Employee employee = new Employee(
+                null,
+                name,
+                dob,
+                gender,
+                email,
+                phone,
+                address,
+                position,
+                deptId,
+                salary
+        );
 
         if (employeeService.addEmployee(employee)) {
-            System.out.println("✓ Employee added successfully! ID: " + employee.getEmployeeId() + ", Dept: " + department.getDepartmentName());
+            System.out.println("✓ Employee added successfully!");
+            System.out.println("ID: " + employee.getEmployeeId()
+                    + ", Dept: " + department.getDepartmentName()
+                    + ", on " + employee.getHireDate()
+                    + ", Status: " + employee.getStatus());
             System.out.print("Add another employee? (y/n): ");
             if (scanner.nextLine().equalsIgnoreCase("y")) {
                 addEmployee();
@@ -242,10 +262,29 @@ public class EmployeeMenu {
                 table.addCell(emp.getAddress());
                 table.addCell("$" + String.format("%,.2f", emp.getSalary()));
 
-                String joinDate = emp.getHireDate() != null
-                        ? emp.getHireDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-                        : "N/A";
-                table.addCell(joinDate);
+                LocalDate hire = emp.getHireDate();
+
+                if (hire != null) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+                    String formattedDate = hire.format(formatter);
+
+                    Period period = Period.between(hire, LocalDate.now());
+                    String duration;
+
+                    if (period.getYears() > 0) {
+                        duration = period.getYears() + " yrs ago";
+                    } else if (period.getMonths() > 0) {
+                        duration = period.getMonths() + " mos ago";
+                    } else if (period.getDays() > 0) {
+                        duration = period.getDays() + " days ago";
+                    } else {
+                        duration = "Today";
+                    }
+
+                    table.addCell(formattedDate + " (" + duration + ")");
+                } else {
+                    table.addCell("N/A");
+                }
             }
 
             System.out.println(table.render());
@@ -726,13 +765,13 @@ public class EmployeeMenu {
     public final static String REPORT_MENU = """
             ╔══════════════════════════════════════════════════╗
             ║                     REPORTS                      ║
-            ╠══════════════════════════════════════════════════╣ 
+            ╠══════════════════════════════════════════════════╣
             ║ [1]. Employee Report                             ║
             ║ [2]. Department Report                           ║
-            ║ [3]. Attendance Report                           ║                       
-            ║ [4]. Salary Report                               ║  
-            ║ [5]. Export All Reports to report.txt            ║                        
-            ║ [0]. Back                                        ║                                 
+            ║ [3]. Attendance Report                           ║
+            ║ [4]. Salary Report                               ║
+            ║ [5]. Export All Reports to report.txt            ║
+            ║ [0]. Back                                        ║
             ╚══════════════════════════════════════════════════╝
             """;
 
@@ -741,7 +780,7 @@ public class EmployeeMenu {
 
         while (running) {
             Components.clearScreen();
-            System.out.print(REPORT_MENU);
+            System.out.println(REPORT_MENU);
             int choice = getIntInput("[+] Enter choice: ");
 
             switch (choice) {

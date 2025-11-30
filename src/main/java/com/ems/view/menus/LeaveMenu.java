@@ -43,15 +43,19 @@ public class LeaveMenu {
             switch (choice) {
                 case 1:
                     viewAllLeaveRequests();
+                    Components.pause();
                     break;
                 case 2:
                     approveLeave();
+                    Components.pause();
                     break;
                 case 3:
                     rejectLeave();
+                    Components.pause();
                     break;
                 case 4:
                     viewLeaveHistory();
+                    Components.pause();
                     break;
                 case 0:
                     running = false;
@@ -61,38 +65,6 @@ public class LeaveMenu {
             }
         }
     }
-
-//    private void viewAllLeaveRequests() {
-//        List<LeaveRequest> requests = leaveService.getPendingLeaves();
-//
-//        if (requests.isEmpty()) {
-//            System.out.println("No pending leave requests.");
-//        } else {
-//            System.out.println("╔═════════════════════════════════════════════════════════════════════════════╗");
-//            System.out.println("║                             PENDING LEAVE REQUESTS                          ║");
-//            System.out.println("╚═════════════════════════════════════════════════════════════════════════════╝");
-//            Table table = new Table(7, BorderStyle.UNICODE_ROUND_BOX_WIDE);
-//            table.addCell("Leave ID");
-//            table.addCell("Employee ID");
-//            table.addCell("Type");
-//            table.addCell("Start Date");
-//            table.addCell("End Date");
-//            table.addCell("Reason");
-//            table.addCell("Status");
-//
-//            for (LeaveRequest req : requests) {
-//                table.addCell(req.getLeaveId());
-//                table.addCell(req.getEmployeeId());
-//                table.addCell(req.getLeaveType());
-//                table.addCell(req.getStartDate().toString());
-//                table.addCell(req.getEndDate().toString());
-//                table.addCell(req.getReason());
-//                table.addCell(req.getStatus());
-//            }
-//
-//            System.out.println(table.render());
-//        }
-//    }
 
     private void viewAllLeaveRequests() {
         List<LeaveRequest> requests = leaveService.getPendingLeaves();
@@ -197,38 +169,6 @@ public class LeaveMenu {
             System.out.println("✗ Failed to reject leave. It may not exist or is not pending.");
         }
     }
-
-//    private void viewLeaveHistory() {
-//        List<LeaveRequest> history = leaveService.getAllLeaveRequests();
-//
-//        if (history.isEmpty()) {
-//            System.out.println("No leave history found.");
-//        } else {
-//            System.out.println("╔═════════════════════════════════════════════════════════════════════════════╗");
-//            System.out.println("║                                  LEAVE HISTORY                              ║");
-//            System.out.println("╚═════════════════════════════════════════════════════════════════════════════╝");
-//            Table table = new Table(7, BorderStyle.UNICODE_ROUND_BOX_WIDE);
-//            table.addCell("Leave ID");
-//            table.addCell("Employee ID");
-//            table.addCell("Type");
-//            table.addCell("Start Date");
-//            table.addCell("End Date");
-//            table.addCell("Reason");
-//            table.addCell("Status");
-//
-//            for (LeaveRequest req : history) {
-//                table.addCell(req.getLeaveId());
-//                table.addCell(req.getEmployeeId());
-//                table.addCell(req.getLeaveType());
-//                table.addCell(req.getStartDate().toString());
-//                table.addCell(req.getEndDate().toString());
-//                table.addCell(req.getReason());
-//                table.addCell(req.getStatus());
-//            }
-//
-//            System.out.println(table.render());
-//        }
-//    }
 
     private void viewLeaveHistory() {
         List<LeaveRequest> history = leaveService.getAllLeaveRequests();

@@ -2,6 +2,7 @@ package com.ems.view;
 
 import com.ems.service.*;
 import com.ems.model.*;
+import com.ems.util.Components;
 import com.ems.util.Table;
 import com.ems.util.BorderStyle;
 import java.util.Scanner;
@@ -36,18 +37,23 @@ public class StaffMenu {
             switch (choice) {
                 case 1:
                     viewMyProfile();
+                    Components.pause();
                     break;
                 case 2:
                     attendanceMenu();
+                    Components.pause();
                     break;
                 case 3:
                     leaveMenu();
+                    Components.pause();
                     break;
                 case 4:
                     salaryMenu();
+                    Components.pause();
                     break;
                 case 5:
                     settingsMenu();
+                    Components.pause();
                     break;
                 case 0:
                     authService.logout();
@@ -211,6 +217,7 @@ public class StaffMenu {
             switch (choice) {
                 case 1:
                     requestLeave(employeeId);
+                    Components.pause();
                     break;
                 case 2:
                 case 3:
@@ -237,6 +244,7 @@ public class StaffMenu {
                         
                         System.out.println(table.render());
                     }
+                    Components.pause();
                     break;
                 case 0:
                     running = false;
@@ -271,6 +279,7 @@ public class StaffMenu {
                 case 2:
                     String slip = payrollService.generateSalarySlip(employeeId);
                     System.out.println(slip);
+                    Components.pause();
                     break;
                 case 0:
                     running = false;
@@ -301,9 +310,11 @@ public class StaffMenu {
             switch (choice) {
                 case 1:
                     System.out.println("Profile update feature coming soon...");
+                    Components.pause();
                     break;
                 case 2:
                     changePassword();
+                    Components.pause();
                     break;
                 case 0:
                     running = false;

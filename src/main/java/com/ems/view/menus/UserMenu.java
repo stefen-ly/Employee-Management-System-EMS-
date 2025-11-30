@@ -32,12 +32,15 @@ public class UserMenu {
             switch (choice) {
                 case 1:
                     createUser();
+                    Components.pause();
                     break;
                 case 2:
                     viewAllUsers();
+                    Components.pause();
                     break;
                 case 3:
                     deleteUser();
+                    Components.pause();
                     break;
                 case 0:
                     running = false;

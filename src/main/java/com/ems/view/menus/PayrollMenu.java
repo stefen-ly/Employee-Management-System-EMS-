@@ -26,24 +26,31 @@ public class PayrollMenu {
             switch (choice) {
                 case 1:
                     setMonthlySalary();
+                    Components.pause();
                     break;
                 case 2:
                     addBonus();
+                    Components.pause();
                     break;
                 case 3:
                     addDeduction();
+                    Components.pause();
                     break;
                 case 4:
                     calculateGrossSalary();
+                    Components.pause();
                     break;
                 case 5:
                     calculateNetSalary();
+                    Components.pause();
                     break;
                 case 6:
                     calculateTax();
+                    Components.pause();
                     break;
                 case 7:
                     generateSalarySlip();
+                    Components.pause();
                     break;
                 case 0:
                     running = false;

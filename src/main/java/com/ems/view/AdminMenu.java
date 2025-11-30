@@ -123,9 +123,11 @@ public class AdminMenu {
                     break;
                 case 2:
                     changePassword();
+                    Components.pause();
                     break;
                 case 3:
                     manualSaveData();
+                    Components.pause();
                     break;
                 case 0:
                     running = false;

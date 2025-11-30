@@ -44,15 +44,19 @@ public class AttendanceMenu {
             switch (choice) {
                 case 1:
                     checkIn();
+                    Components.pause();
                     break;
                 case 2:
                     checkOut();
+                    Components.pause();
                     break;
                 case 3:
                     showAllAttendance();
+                    Components.pause();
                     break;
                 case 4:
                     showEmployeeAttendance();
+                    Components.pause();
                     break;
                 case 0:
                     running = false;
